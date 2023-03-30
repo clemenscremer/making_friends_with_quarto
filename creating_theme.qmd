@@ -1,0 +1,180 @@
+---
+title: "Creating a quarto theme"
+subtitle: Now with subtitle
+author: 
+  name: "Skilled Presenters Name"
+  email: mail@greatquartopresentations.com
+date: "2023-03-28"
+format: 
+  revealjs: 
+    theme: [default, assets/my_custom.scss]
+    logo: https://quarto.org/quarto.png
+---
+
+
+
+## Step 1: Create a custom Sass CSS file
+
+create a new file `my_custom.scss` in the `assets` subfolder* of your project (where this file is located).
+
+::: footer
+*you can use any folder name you like, but the assets folder is a good choice, as it is the default folder for assets in Quarto and we'll stick to it for this example.
+:::
+
+
+
+## Step 2.1: Edit scss file defaults
+
+Add the following code to the top of your `my_custom.scss` file:
+
+``` css
+/*-- scss:defaults --*/
+```
+this region decorator indicates to Quarto that the following code is used to define variables and default values, such as custom colors.
+
+**At least one decorator is required**
+
+::: footer
+further reading on region decorators in the [Quarto documentation](https://quarto.org/docs/output-formats/html-themes-more.html)
+:::
+
+
+## Step 2.2: Define use of scss-style in current qmd document
+
+in the header of this qmd file, change the theme line to include your custom scss file:
+
+``` yaml
+theme: [default, assets/my_custom.scss]
+```
+congrats! you are now using your custom scss style in this document. 
+
+Now let's add some more customization to your theme.
+
+
+
+## Step 2.3: import fonts to the template
+
+Edit scss file defaults section you created in step 2.1 and add the following code:
+
+``` css
+// Import custom fonts
+@import url('https://fonts.googleapis.com/css2?family=Karbon:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
+
+```
+this imports the fonts Karbon and Helvetica from Google Fonts. 
+
+Lets check if we can use both now:
+
+* Default font: normal, **bold**
+* [Arial: normal, **bold**]{style="font-family: Arial"} 
+* [Karbon: normal, **bold**]{style="font-family: Karbon"}
+
+## Step 2.4: use the fonts
+
+add the following code:
+``` css
+// set default fonts for headings and body 
+$font-family-sans-serif: "Arial", sans-serif !default;
+$presentation-slide-text-align: left !default;
+$presentation-heading-font-weight: 400 !default;
+```
+this sets the default font for headings and body text to Arial and orients the text to the left.
+In addition we choose a lighter font weight for headings.
+
+Many other options are available to customize to your requirements. E.g. you can use
+``` css
+$presentation-heading-text-transform: uppercase !default;
+```
+
+## Step 2.5: take care of colors
+lets add some colors to our theme.
+``` css
+// set default colors 
+$body-bg:               #ffffff !default;
+$body-color:            #51626F !default;
+$presentation-heading-color: #004165 !default;
+```
+this sets the background color to white, the body text color to a dark grey and the heading color to a blue.
+
+
+## Step 3: Edit scss file rules
+
+Scss rules have the objective to adjust more fine grained behavior than the default values.
+They are defined by the following region decorator:
+``` css
+/*-- scss:rules --*/
+```
+add this decorator to your scss file.
+
+
+## Step 3.1: add customization to title slide
+
+in the scss rules section, add the following code:
+``` css
+// customize title slide
+#title-slide {
+  text-align: left;
+  .subtitle, 
+  .quarto-title-subtitle {
+    font-size: 1.0em;
+    font-weight: 400;
+    color: $body-color;
+  }
+// to be continued
+}
+```
+to indent the text on the title slide and specify the font weight and color of the subtitle.
+
+
+## Step 3.2: add customization to author slide
+
+We can see that the author information is not displayed correctly.
+This can be handeled by adding the following within the title-slide section:
+``` css
+  // author information
+  .quarto-title-author-email {
+    font-style: italic;
+    font-size: 0.6em;
+    color: #51626F;
+  }
+  .author, 
+  .quarto-title-author-name {
+    color: $presentation-heading-color;
+    font-size: 1.0em;
+  }
+  .quarto-title-authors {
+    display: flex;
+    justify-content: left;
+  
+    .quarto-title-author {
+      padding-left: 0em;
+      padding-right: 0em;
+      padding-top: 2.00em;
+      width: 100%;
+    }
+  }
+```
+
+## Step 3.3: add date formatting
+
+The date is now standing out compared to other font styles. Let's fix that by adding to the title-slide section:
+``` css
+  // date
+  .date, 
+  .quarto-date {
+    font-style: italic;
+    font-size: 0.6em;
+    color: #51626F;
+  }
+```
+
+for more information on the available options to handle authors and affiliation, check out the [Quarto documentation](https://quarto.org/docs/journals/authors.html)
+
+
+
+
+
+## Concluding remarks
+This is just a brief step-by-step introduction to get you started. Check out the [Quarto documentation](https://quarto.org/docs/output-formats/html-themes.html) for more information.
+

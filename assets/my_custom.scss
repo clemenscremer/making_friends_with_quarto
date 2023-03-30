@@ -1,0 +1,63 @@
+/*-- scss:defaults --*/
+// Import custom fonts
+@import url('https://fonts.googleapis.com/css2?family=Karbon:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
+
+// set default fonts for headings and body 
+$font-family-sans-serif: "Arial", sans-serif !default;
+$presentation-slide-text-align: left !default;
+$presentation-heading-font-weight: 400 !default;
+
+// set default colors 
+$body-bg:               #ffffff !default;
+$body-color:            #51626F !default;
+$presentation-heading-color: #004165 !default;
+
+/*-- scss:rules --*/
+#title-slide {
+  text-align: left;
+  .subtitle, 
+  .quarto-title-subtitle {
+    font-size: 1.0em;
+    font-weight: 400;
+    color: $body-color;
+  }
+  // author information
+  .quarto-title-author-email {
+    font-style: italic;
+    font-size: 0.6em;
+    color: #51626F;
+  }
+  .author, 
+  .quarto-title-author-name {
+    color: $presentation-heading-color;
+    font-size: 1.0em;
+  }
+  .quarto-title-authors {
+    display: flex;
+    justify-content: left;
+  
+    .quarto-title-author {
+      padding-left: 0em;
+      padding-right: 0em;
+      padding-top: 2.00em;
+      width: 100%;
+    }
+  }
+  // date
+  .date, 
+  .quarto-date {
+    font-style: italic;
+    font-size: 0.6em;
+    color: #51626F;
+  }
+
+}
+
+
+
+
+
+
+
+
